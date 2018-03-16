@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+	<person>
+		<name>anjone</name>
+		<age>12</age>
+	</person>
+	
+	<person>
+		<name>Bob</name>
+		<age>11</age>
+	</person>
+	
+	<person>
+		<name>Cici</name>
+		<age>13</age>
+	</person>
+	
+	<person>
+		<name>Dogger</name>
+		<age>15</age>
+	</person>
+</persons>

@@ -32,7 +32,7 @@ public class AspectDemo {
 	/**
 	 *
 	 */
-	public void beforeDoSomething(){
+	public void beforeDoSomething(JoinPoint jp){
 		System.out.println("AspectDemo before do something");
 	}
 

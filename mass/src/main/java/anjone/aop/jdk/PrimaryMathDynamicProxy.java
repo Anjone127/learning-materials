@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
+ * JDK动态代理只能对实现了接口的类生成代理，而不能针对类
  * @author anjone
  * @Date 2018/3/14.
  */

@@ -1,8 +1,5 @@
 package com.anjone.spring.demo;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class Test {
 	volatile static Integer i =2;
 

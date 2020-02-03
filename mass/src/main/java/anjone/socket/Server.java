@@ -9,21 +9,17 @@ import java.util.concurrent.*;
  */
 public class Server {
 
-	private static boolean Flag = true;
+    private static boolean Flag = true;
 
-	public static void main(String[] args) throws Exception{
-		ServerSocket server = new ServerSocket(20006);
-		Socket client = null;
-		ThreadFactory namedThreadFactory = new ServerThreadFactory();
-		ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
-				0L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
-		while(Flag){
-			client = server.accept();
-			System.out.println("与客户端连接成功！");
-			singleThreadPool.execute(new ServerThread(client));
-		}
-		singleThreadPool.shutdown();
-		server.close();
-	}
+    public static void main(String[] args) throws Exception {
+        ServerSocket server = new ServerSocket(20006);
+        ExecutorService threadPool = Executors.newSingleThreadExecutor();
+        while (Flag) {
+            Socket client = server.accept();
+            System.out.println("与客户端连接成功！");
+            threadPool.execute(new ServerThread(client));
+        }
+        threadPool.shutdown();
+        server.close();
+    }
 }

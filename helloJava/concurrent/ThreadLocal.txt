@@ -1,0 +1,20 @@
+threadLocal 线性探测法
+threadLocal 中定义了 threadLocalMap对象 用来保存线程内数据
+通过 get set 方法获取\赋值。
+1. 方法内部先获取当前线程，
+2. 在获取当前线程的threadLocalMap
+3. threadLocalMap.getEntry(ThreadLocal key)
+Ps: threadLocal 本身就是 threadLocalMap的key
+
+-
+少了内存泄漏。试想我曾今存储了一个ThreadLocal对象到ThreadLocalMap中，但后来我不需要这个对象了,只有ThreadLocalMap中的key还引用了该对象。如果这是个强引用的话，该对象将一直无法回收。因为我已经失去了其他所有该对象的外部引用，这个ThreadLocal对象将一直存在，而我却无法访问也无法回收它，导致内存泄漏。又因为ThreadLocalMap的生命周期和线程实例的生命周期一致，只要该线程一直不退出，比如线程池中的线程，那么这种内存泄漏问题将会不断积累，直到导致系统奔溃。而如果是弱引用的话，当ThreadLocal失去了所有外部强引用的话，下次垃圾收集该ThreadLocal对象将被回收，对应的ThreadLocalMap中的key将为null。下次get和set方法被执行时将会对key为null的Entry进行清理。有效的减少了内存泄漏的可能和影响。
+
+—
+使用前clear的目的
+删除老数据，避免读取老数据而导致错误；同时保证了线程服用时，内存垃圾能回收。
+
+
+--
+InheritableThreadLocal
+可以通过此获取到父线程参数
+thread.init(…）初始化时调用ThreadLocal.createInheritedMap  设置thread的InheritableThreadLocal

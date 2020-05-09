@@ -1,0 +1,20 @@
+classLoader
+作用
+负责将 Class 的字节码形式转换成内存形式的 Class 对象
+
+BootstrapClassLoader
+负责加载 JVM 运行时核心类，这些类位于 JAVA_HOME/lib/rt.jar
+ExtensionClassLoader
+通常以 javax 开头，它们的 jar 包位于 JAVA_HOME/lib/ext/*.jar
+AppClassLoader
+
+
+自定义加载器  extend ClassLoader
+重写findClass()  -> 调用defineClass() 形成class对象
+打破双亲委派机制 重写loadClass()
+
+
+方法区卸载Class的条件
+1 该类所有的实例已经被回收
+2 加载该类的ClassLoader已经被回收
+4该类对应的java.lang.Class对象没有任何地方被引用

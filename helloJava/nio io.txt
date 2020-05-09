@@ -1,0 +1,15 @@
+socket 两台机子通过socket通信
+会创建3个socket
+
+server 1个socket接收链接，1个socket与客户端通新
+client 1个socket与服务器通信
+
+这种模式下，需要创建足够多的线程处理client请求
+读写全是阻塞，阻塞时不能处理其他请求或逻辑 占用资源
+io资源浪费
+-----------
+nio 初衷减少资源浪费  一个线程处理所有请求
+ServerSocketChannel
+
+bio主动监听 socket链接请求
+nio 通过监听模式

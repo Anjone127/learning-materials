@@ -1,0 +1,24 @@
+string
+final 不可继承
+内部有char[] 数组保存数据 不可以变  （可以通过unsafe改变）
+1.8 以后
+hashcode 有缓存  for 0->length-1  h = 31 * h + val[i];
+--------------------------
+stringBuffer extends AbstractStringBuilder
+线程安全  synchronized
+--------------------------
+stringBuilder extends AbstractStringBuilder
+非线程安全
+--------------------------
+AbstractStringBuilder  impl appendable CharSequence
+
+stringBuilder 和 stringBuffer 都是调用 AbstractStringBuilder 具体实现 代理
+
+
+expandCapacity cap = cap*2 + 2
+
+--------------------------
+CharSequence
+length
+charAt
+subSequence

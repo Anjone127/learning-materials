@@ -1,0 +1,21 @@
+1.7
+基于unSafe
+ ___
+|   |
+|___|
+
+
+
+
+内部类segment 分段锁 继承 ReentrantReadWriteLock
+    segment里有属性 hashEnter[size]  minSize = 2  , size 一定为2^n次 ,  size >  initialCapacity/concurrencyLevel
+
+构造参数 loadFactor加载因子
+构造参数 initialCapacity 初始化tab数量  --
+构造参数 concurrencyLevel
+
+
+put
+计算key hash
+用hash高位 去确定segment下标  用hash低位去确定segment里面hashEntry的位置
+

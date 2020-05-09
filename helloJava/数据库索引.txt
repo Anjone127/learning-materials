@@ -1,0 +1,30 @@
+-----------------------
+索引失效的情况
+
+
+1. like %开头
+2. where 条件中有运算符  eg。  where id-1 = 1 加减乘除
+3. 复合索引a，b，c  使用 b，c
+4. not in ！=
+5. sql 语句隐式转化 where str = 123
+
+
+------------------------
+聚集索引  子节点包含数据
+
+
+非聚集索引 子节点只包含索引和地址（innoDB保存主键值，myISAM地址为row_id）
+
+
+------------------------
+innoDB & myISAM 区别
+
+1. InnoDB 支持事务，MyISAM 不支持事务。这是 MySQL 将默认存储引擎从 MyISAM 变成 InnoDB 的重要原因之一；2. InnoDB 支持外键，而 MyISAM 不支持。对一个包含外键的 InnoDB 表转为 MYISAM 会失败；  3. InnoDB 是聚集索引，MyISAM 是非聚集索引。
+
+2. InnoDB 支持外键，而 MyISAM 不支持。对一个包含外键的 InnoDB 表转为 MYISAM 会失败；
+
+3. InnoDB 是聚集索引，MyISAM 是非聚集索引。
+
+4. InnoDB 不保存表的具体行数，执行 select count(*) from table 时需要全表扫描。而MyISAM 用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快；
+
+5. InnoDB 最小的锁粒度是行锁，MyISAM 最小的锁粒度是表锁。一个更新语句会锁住整张表，导致其他查询和更新都会被阻塞，因此并发访问受限。这也是 MySQL 将默认存储引擎从 MyISAM 变成 InnoDB 的重要原因之一；

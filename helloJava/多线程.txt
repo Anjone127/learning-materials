@@ -1,0 +1,7 @@
+线程状态
+
+
+wait
+notify
+sleep
+

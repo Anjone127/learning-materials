@@ -26,8 +26,8 @@ public class PointcutDemoTest {
 
 	@Test
 	public void cglibProxy(){
-        Integer primaryMath = (Integer) CglibObjectProxyFactory.getProxyInstance(Integer.class);
-        primaryMath.equals("a");
+        PrimaryMathImpl primaryMath = (PrimaryMathImpl) CglibObjectProxyFactory.getProxyInstance(PrimaryMathImpl.class);
+        primaryMath.add(1,1);
 	}
 
 	@Test

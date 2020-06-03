@@ -1,9 +1,6 @@
 package anjone;
 
-
-import anjone.enums.FruitEnums;
-import org.openjdk.jol.info.ClassLayout;
-import org.openjdk.jol.vm.VM;
+import java.util.stream.IntStream;
 
 /**
  * @author gjy
@@ -11,11 +8,35 @@ import org.openjdk.jol.vm.VM;
  */
 public class Size {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        System.out.println(VM.current().details());
-        String a = "abc";
-        System.out.println(ClassLayout.parseClass(FruitEnums.class).toPrintable());
-        System.out.println(ClassLayout.parseClass(FruitEnums.class).toPrintable());
+        ValueHolder valueHolder = new ValueHolder();
+
+        IntStream.range(1, 1000).forEach((v) -> new Thread(new Runabble1(valueHolder)).start());
+    }
+
+    static class Runabble1 implements Runnable {
+        ValueHolder lock;
+
+        Runabble1(ValueHolder valueHolder) {
+            this.lock = valueHolder;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+                lock.val++;
+                System.out.println(lock.val);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
+
+class ValueHolder {
+    Integer val = 1;
+}
+
+

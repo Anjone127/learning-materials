@@ -1,6 +1,7 @@
 package anjone.aop.spring;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,14 @@ public class AspectDemo {
 	public void beforeDoSomething(JoinPoint jp){
 		System.out.println("AspectDemo before do something");
 	}
+
+    @Around("doSomething()")
+    public Object aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("AspectDemo aroundAdvice do something");
+        Object o = proceedingJoinPoint.proceed();
+        System.out.println("AspectDemo aroundAdvice do something");
+        return o;
+    }
 
 	@After("doSomething()")
 	public void afterDoSomething(JoinPoint jp){
